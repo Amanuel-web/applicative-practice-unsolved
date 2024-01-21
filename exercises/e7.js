@@ -6,9 +6,14 @@ import { data } from "../data/data";
 
 export function getPlanetsNamesWithMoons(data) {
   // Your code goes here...
+  const planet = [];
+  for (let i = 0; i < data.planets.length; i++) {
+    if (data.planets[i].moons) {
+      planet.push(data.planets[i].name);
+    }
+  }
+  return planet;
 }
-
-
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-7"

@@ -6,9 +6,12 @@ import { data } from "../data/data";
 
 export function getPlanetNames(data) {
   // Your code goes here...
+  const planet = [];
+  for (let i = 0; i < data.planets.length; i++) {
+    planet.push(data.planets[i].name);
+  }
+  return planet;
 }
-
-
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-1"
