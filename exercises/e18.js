@@ -7,27 +7,39 @@
 export function getGreatestDiscoveryYear(data) {
   // Your code goes here...
   // feel free to import your `maxBy` or `minBy` methods from previous lessons
-  const discoveryYears = data.asteroids.map(
-    (asteroid) => asteroid.discoveryYear
-  );
-  const yearCount = {};
-
-  discoveryYears.forEach((year) => {
-    yearCount[year] = (yearCount[year] || 0) + 1;
-  });
-
-  let mostDiscoveriesYear = null;
-  let maxDiscoveries = 0;
-
-  for (const year in yearCount) {
-    const numericYear = parseInt(year);
-    if (yearCount[year] > maxDiscoveries) {
-      maxDiscoveries = yearCount[year];
-      mostDiscoveriesYear = numericYear;
+  function maxBy(array, cb) {
+    if (array.length === 0) {
+      return undefined;
     }
-  }
+    let minValue = cb(array[0]);
+    let minElement = array[0];
 
-  return mostDiscoveriesYear;
+    for (let i = 1; i < array.length; i++) {
+      const callbackValue = cb(array[i]);
+      if (callbackValue < minValue) {
+        minValue = callbackValue;
+        minElement = array[i];
+      }
+    }
+
+    return minElement;
+  }
+  const yearCounts = data.asteroids.reduce((acc, asteroid) => {
+    const year = asteroid.discoveryYear;
+    acc[year] = (acc[year] || 0) + 1;
+    return acc;
+  }, {});
+
+  const mostCommonYearEntry = Object.entries(yearCounts).reduce(
+    (maxEntry, currentEntry) => {
+      return currentEntry[1] > (maxEntry ? maxEntry[1] : 0)
+        ? currentEntry
+        : maxEntry;
+    },
+    null
+  );
+
+  return mostCommonYearEntry ? Number(mostCommonYearEntry[0]) : undefined;
 }
 
 // === TEST YOURSELF ===

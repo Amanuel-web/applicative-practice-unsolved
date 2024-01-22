@@ -6,11 +6,9 @@ import { data } from "../data/data";
 
 export function getAsteroidDataByName(data, asteroidName) {
   // Your code goes here...
-  for (let i = 0; i < data.asteroids.length; i++) {
-    if (data.asteroids[i].name.includes(asteroidName)) {
-      return data.asteroids[i];
-    }
-  }
+  return data.asteroids.find(
+    (nameOfAsteroid) => nameOfAsteroid.name === asteroidName
+  );
 }
 
 // === TEST YOURSELF ===
